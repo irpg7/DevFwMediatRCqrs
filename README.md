@@ -1,14 +1,16 @@
 DevFramework CQRS ve Mediatr
+
 •	DataAccess
 
-  	RepositoryPattern kullanılmaya devam edilecek. Klasör yapıları abstract ve concrete olarak kalabilir.
+   RepositoryPattern kullanılmaya devam edilecek. Klasör yapıları abstract ve concrete olarak kalabilir.
     
-  	Context singleton pattern’de mi yoksa mevcut halinde mi kullanılmalı testler sonucunda belirlenmeli. 
+   Context singleton pattern’de mi yoksa mevcut halinde mi kullanılmalı testler sonucunda belirlenmeli. 
     
-  	Get operasyonları Repository’de Queryable olarak tanımlanabilir. Böylece ileri de doğabilecek olan IQueryableRepository ihtiyacı da         ortadan kalkmış olur. Get ve GetAll işlemlerinin yanı sıra da eklenebilir.
+   Get operasyonları Repository’de Queryable olarak tanımlanabilir. Böylece ileri de doğabilecek olan IQueryableRepository ihtiyacı da        ortadan kalkmış olur. Get ve GetAll işlemlerinin yanı sıra da eklenebilir.
 
 •	Business
- 	 Abstract ve Concrete klasörleri,  Commands ve Queries olarak ikiye ayrılabilir. Daha sonra altlarında ilgili nesneler klasörlenebilir ve    kaynak yönetimi böyle gerçekleştirilebilir. Yada Direkt olarak ilgili Entity’nin Adı kök klasör olarak verilip, daha sonra altında          Commands ve Queries olarak ayrıştırılabilir.(Bu daha iyi olur okunurluk açısından.) Command ve Queryler MediatR kütüphanesinde bulunan      IRequest’den implemente edilir.
+
+   Abstract ve Concrete klasörleri,  Commands ve Queries olarak ikiye ayrılabilir. Daha sonra altlarında ilgili nesneler klasörlenebilir ve    kaynak yönetimi böyle gerçekleştirilebilir. Yada Direkt olarak ilgili Entity’nin Adı kök klasör olarak verilip, daha sonra altında          Commands ve Queries olarak ayrıştırılabilir.(Bu daha iyi olur okunurluk açısından.) Command ve Queryler MediatR kütüphanesinde bulunan      IRequest’den implemente edilir.
    
    Commandlar veya Querylerde filtreme yapılmak istendiğinde ilgili Command veya Query class’ı içine property tanımlanarak yapılabilir.
    
