@@ -1,4 +1,6 @@
-﻿using DataAccess.Abstract;
+﻿using Business.Constants;
+using Core.Utilities.Results;
+using DataAccess.Abstract;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Business.Mediatr.Products.Commands.DeleteProduct
 {
-    public class DeleteProductCommand:IRequest
+    public class DeleteProductCommand:IRequest<IResult>
     {
         public int ProductId { get; set; }
 
-        public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand>
+        public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand,IResult>
         {
             IProductDal _productDal;
 
@@ -21,12 +23,12 @@ namespace Business.Mediatr.Products.Commands.DeleteProduct
                 _productDal = productDal;
             }
 
-            public async Task<Unit> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
+            public async Task<IResult> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
             {
                 var productToDelete = _productDal.Get(p => p.ProductId == request.ProductId);
 
                  await _productDal.DeleteAsync(productToDelete);
-                return Unit.Value;
+                return new SuccessResult(Messages.ProductDeleted);
             }
         }
     }

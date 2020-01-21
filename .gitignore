@@ -1,0 +1,19 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/DevFwCqrs/Business/bin/Debug/netstandard2.0
+/DevFwCqrs/Business/obj
+/DevFwCqrs/Core/bin/Debug/netstandard2.0
+/DevFwCqrs/Core/obj
+/DevFwCqrs/CoreRestApi/bin/Debug/netcoreapp2.2
+/DevFwCqrs/CoreRestApi/obj/Debug/netcoreapp2.2
+/DevFwCqrs/CoreRestApi/obj
+/DevFwCqrs/DataAccess/bin/Debug/netstandard2.0
+/DevFwCqrs/Entities/bin/Debug/netstandard2.0
+/DevFwCqrs/Entities/obj/Debug/netstandard2.0
+/DevFwCqrs/Entities/obj/Release/netstandard2.0
+/DevFwCqrs/Entities/obj
+/DevFwCqrs/DataAccess/obj
+/DevFwCqrs/.vs/DevFwCqrs/v15
+/.vs

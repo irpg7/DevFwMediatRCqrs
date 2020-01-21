@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract;
+﻿using Core.Utilities.Results;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using MediatR;
 using System;
@@ -9,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Business.Mediatr.Products.Queries.GetProducts
 {
-    public class GetProductsQuery:IRequest<IEnumerable<Product>>
+    public class GetProductsQuery:IRequest<IDataResult<IEnumerable<Product>>>
     {
-        class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, IEnumerable<Product>>
+        class GetProductsQueryHandler : IRequestHandler<GetProductsQuery,IDataResult<IEnumerable<Product>>>
         {
             readonly IProductDal _productDal;
 
@@ -20,9 +21,9 @@ namespace Business.Mediatr.Products.Queries.GetProducts
                 _productDal = productDal;
             }
 
-            public async Task<IEnumerable<Product>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
+            public async Task<IDataResult<IEnumerable<Product>>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
             {
-                return await _productDal.GetListAsync();
+                return new SuccessDataResult<IEnumerable<Product>>(await _productDal.GetListAsync());
             }
         }
     }

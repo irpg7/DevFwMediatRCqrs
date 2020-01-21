@@ -1,4 +1,6 @@
-﻿using DataAccess.Abstract;
+﻿using Business.Constants;
+using Core.Utilities.Results;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using MediatR;
 using System;
@@ -9,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Business.Mediatr.Products.Commands.UpdateProduct
 {
-    public class UpdateProductCommand:IRequest<Product>
+    public class UpdateProductCommand:IRequest<IResult>
     {
         public Product ProductForUpdate { get; set; }
-        public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Product>
+        public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, IResult>
         {
             IProductDal _productDal;
 
@@ -21,10 +23,10 @@ namespace Business.Mediatr.Products.Commands.UpdateProduct
                 _productDal = productDal;
             }
 
-            public async Task<Product> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+            public async Task<IResult> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
             {
                 await _productDal.UpdateAsync(request.ProductForUpdate);
-                return request.ProductForUpdate;
+                return new SuccessResult(Messages.ProductUpdated);
             }
         }
     }
