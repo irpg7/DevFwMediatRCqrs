@@ -7,7 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
-
+using DataAccess.Concrete.EntityFramework.Contexts;
+using DataAccess.Concrete.NpgSql;
+using Core.Utilities.Security.Jwt;
+using AutoMapper;
 
 namespace Business.DependencyResolvers.Microsoft
 {
@@ -16,7 +19,12 @@ namespace Business.DependencyResolvers.Microsoft
         public void Load(IServiceCollection services)
         {
             services.AddMemoryCache();
-            services.AddTransient<IProductDal, EfProductDal>();
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddTransient<IProductDal, PgProductDal>();
+            services.AddScoped<IUserDal, PgUserDal>();
+            services.AddScoped<IUserOperationClaimDal, PgUserOperationClaimDal>();
+            services.AddScoped<IOperationClaimDal, PgOperationClaimDal>();
+            services.AddScoped<ITokenHelper, JwtHelper>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
         }
     }

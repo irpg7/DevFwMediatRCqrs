@@ -2,6 +2,7 @@
 using Business.Mediatr.Products.Queries.GetProducts;
 using Entities.Concrete;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace CoreRestApi.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         IMediator _mediator;
@@ -30,8 +32,8 @@ namespace CoreRestApi.Controllers
         [HttpPost("Add")]
         public async Task<IActionResult> Add([FromBody]CreateProductCommand createProduct)
         {
-           await _mediator.Send(createProduct);
-            return StatusCode(201);
+            var result = await _mediator.Send(createProduct);
+            return StatusCode(201,result.Message);
         }
     }
 }
