@@ -13,12 +13,13 @@ using System.Threading.Tasks;
 
 namespace Business.Mediatr.Users.Queries.LoginUser
 {
-    public class LoginUserQuery:IRequest<IDataResult<AccessToken>>
+    public class LoginUserQuery : IRequest<IDataResult<AccessToken>>
     {
+        //kerem was here
         public string UserName { get; set; }
         public string Password { get; set; }
 
-        public class LoginUserQueryHandler:IRequestHandler<LoginUserQuery,IDataResult<AccessToken>>
+        public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, IDataResult<AccessToken>>
         {
             IUserDal _userDal;
             ITokenHelper _tokenHelper;
@@ -42,7 +43,7 @@ namespace Business.Mediatr.Users.Queries.LoginUser
                 var claims = _userDal.GetClaims(user);
                 var accessToken = _tokenHelper.CreateAccessToken(user, claims);
 
-                return new SuccessDataResult<AccessToken>(accessToken,Messages.SuccessfulLogin);
+                return new SuccessDataResult<AccessToken>(accessToken, Messages.SuccessfulLogin);
             }
         }
     }
